@@ -17,9 +17,14 @@ app.get('/', (req, res, next) => {
 });
 
 app.post('/data', (req, res, next) => {
-    console.info('I am in data');
+    console.info('I am way in the data');
     console.info(`Data ${JSON.stringify(req.body)}`); // Handle the request
     res.send(`Data ${JSON.stringify(req.body)}`); // Handle the request
+});
+
+app.use((req, res, next) => {
+    console.error(`unknown route: ${req.method} ${req.originalUrl}`);
+    res.status(404).send('Dude, that is an unsupported method/route');
 });
 
 const server = app.listen(port, err => {
